@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Cripto PoC</ion-title>
+    <ion-title>PoC plugin de criptografia</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="clearAll()">Limpar</ion-button>
     </ion-buttons>
@@ -8,32 +8,84 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-item>
-    <ion-label position="stacked">Texto</ion-label>
-    <ion-input [(ngModel)]="inputText"></ion-input>
-  </ion-item>
 
-  <ion-button expand="block" (click)="encrypt()">Encriptografar</ion-button>
+  <!-- 🔐 CRIPTOGRAFIA SIMPLES -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Processo sem senha</ion-card-title>
+      <ion-card-subtitle>Feito a criptografia só pode ser desfeita no mesmo dispositivo</ion-card-subtitle>
+    </ion-card-header>
 
-  <br />
-  <p>Texto Criptografado:</p>
-  <ion-item *ngIf="encryptedText">
-    <ion-textarea readonly>{{ encryptedText }}</ion-textarea>
-    <ion-button fill="clear" slot="end" (click)="copyToClipboard(encryptedText)">
-      <ion-icon name="copy-outline"></ion-icon>
-    </ion-button>
-  </ion-item>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Texto</ion-label>
+        <ion-input [(ngModel)]="inputText"></ion-input>
+      </ion-item>
 
-  <ion-button expand="block" (click)="decrypt()" [disabled]="!encryptedText">
-    Descriptografar
-  </ion-button>
+      <ion-button expand="block" (click)="encrypt()">Encriptografar</ion-button>
 
-  <br />
-  <p>Texto Descriptografado:</p>
-  <ion-item *ngIf="decryptedText">
-    <ion-textarea readonly>{{ decryptedText }}</ion-textarea>
-    <ion-button fill="clear" slot="end" (click)="copyToClipboard(decryptedText)">
-      <ion-icon name="copy-outline"></ion-icon>
-    </ion-button>
-  </ion-item>
+      <p *ngIf="encryptedText">Texto Criptografado:</p>
+      <ion-item *ngIf="encryptedText">
+        <ion-textarea readonly>{{ encryptedText }}</ion-textarea>
+        <ion-button fill="clear" slot="end" (click)="copyToClipboard(encryptedText)">
+          <ion-icon name="copy-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-button expand="block" (click)="decrypt()" [disabled]="!encryptedText">
+        Descriptografar
+      </ion-button>
+
+      <p *ngIf="decryptedText">Texto Descriptografado:</p>
+      <ion-item *ngIf="decryptedText">
+        <ion-textarea readonly>{{ decryptedText }}</ion-textarea>
+        <ion-button fill="clear" slot="end" (click)="copyToClipboard(decryptedText)">
+          <ion-icon name="copy-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- 🔐 CRIPTOGRAFIA COM SENHA -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Processo com senha</ion-card-title>
+      <ion-card-subtitle>Sistema PBKDF2</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Texto</ion-label>
+        <ion-input [(ngModel)]="inputTextWithPassword"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Senha</ion-label>
+        <ion-input [(ngModel)]="password" type="password"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" (click)="encryptWithPassword()">Encriptografar com Senha</ion-button>
+
+      <p *ngIf="encryptedTextWithPassword">Texto Criptografado:</p>
+      <ion-item *ngIf="encryptedTextWithPassword">
+        <ion-textarea readonly>{{ encryptedTextWithPassword }}</ion-textarea>
+        <ion-button fill="clear" slot="end" (click)="copyToClipboard(encryptedTextWithPassword)">
+          <ion-icon name="copy-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-button expand="block" (click)="decryptWithPassword()" [disabled]="!encryptedTextWithPassword">
+        Descriptografar com Senha
+      </ion-button>
+
+      <p *ngIf="decryptedTextWithPassword">Texto Descriptografado:</p>
+      <ion-item *ngIf="decryptedTextWithPassword">
+        <ion-textarea readonly>{{ decryptedTextWithPassword }}</ion-textarea>
+        <ion-button fill="clear" slot="end" (click)="copyToClipboard(decryptedTextWithPassword)">
+          <ion-icon name="copy-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

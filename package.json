@@ -13,6 +13,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
+    "android-prod": "npm install && ionic build:secure && npm run build:secure && ionic cap sync android && ionic copy android && ionic cap open android",
+    "ios-prod": "npm install && ionic build:secure && npm run build:secure && ionic cap sync ios && ionic copy ios && ionic cap open ios",
     "android": "npm install && ionic build && npm run build:secure && ionic cap sync android && ionic copy android && ionic cap open android",
     "ios": "npm install && ionic build && npm run build:secure && ionic cap sync ios && ionic copy ios && ionic cap open ios"
   },
