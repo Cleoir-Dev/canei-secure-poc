@@ -8,15 +8,14 @@
     "start": "ng serve",
     "build": "ionic build",
     "build:prod": "ionic build --prod",
-    "obfuscate": "javascript-obfuscator ./www --output ./www --config javascript-obfuscator.config.js",
-    "build:secure": "npm run build:prod && npm run obfuscate",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "android-prod": "npm install && ionic build:secure && npm run build:secure && ionic cap sync android && ionic copy android && ionic cap open android",
-    "ios-prod": "npm install && ionic build:secure && npm run build:secure && ionic cap sync ios && ionic copy ios && ionic cap open ios",
-    "android": "npm install && ionic build && npm run build:secure && ionic cap sync android && ionic copy android && ionic cap open android",
-    "ios": "npm install && ionic build && npm run build:secure && ionic cap sync ios && ionic copy ios && ionic cap open ios"
+    "ionic:build:after": "npx javascript-obfuscator www --output www --config javascript-obfuscator.config.js",
+    "android-prod": "npm install && npm run build && ionic cap copy android && ionic cap open android",
+    "ios-prod": "npm install && npm run build && ionic cap copy ios && ionic cap open ios",
+    "android": "npm install && npm run build && ionic cap copy android && ionic cap open android",
+    "ios": "npm install && npm run build && ionic cap copy ios && ionic cap open ios"
   },
   "private": true,
   "dependencies": {
@@ -64,6 +63,7 @@
     "eslint-plugin-prefer-arrow": "1.2.2",
     "jasmine-core": "~5.1.0",
     "jasmine-spec-reporter": "~5.0.0",
+    "javascript-obfuscator": "^4.1.1",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
