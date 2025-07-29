@@ -1,20 +1,39 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Cripto PoC</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="clearAll()">Limpar</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="stacked">Texto</ion-label>
+    <ion-input [(ngModel)]="inputText"></ion-input>
+  </ion-item>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-button expand="block" (click)="encrypt()">Encriptografar</ion-button>
+
+  <br />
+  <p>Texto Criptografado:</p>
+  <ion-item *ngIf="encryptedText">
+    <ion-textarea readonly>{{ encryptedText }}</ion-textarea>
+    <ion-button fill="clear" slot="end" (click)="copyToClipboard(encryptedText)">
+      <ion-icon name="copy-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+
+  <ion-button expand="block" (click)="decrypt()" [disabled]="!encryptedText">
+    Descriptografar
+  </ion-button>
+
+  <br />
+  <p>Texto Descriptografado:</p>
+  <ion-item *ngIf="decryptedText">
+    <ion-textarea readonly>{{ decryptedText }}</ion-textarea>
+    <ion-button fill="clear" slot="end" (click)="copyToClipboard(decryptedText)">
+      <ion-icon name="copy-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
 </ion-content>

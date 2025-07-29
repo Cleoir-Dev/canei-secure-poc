@@ -6,10 +6,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ionic build",
+    "build:prod": "ionic build --prod",
+    "obfuscate": "javascript-obfuscator ./www --output ./www --config javascript-obfuscator.config.js",
+    "build:secure": "npm run build:prod && npm run obfuscate",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "android": "npm install && ionic build && npm run build:secure && ionic cap sync android && ionic copy android && ionic cap open android",
+    "ios": "npm install && ionic build && npm run build:secure && ionic cap sync ios && ionic copy ios && ionic cap open ios"
   },
   "private": true,
   "dependencies": {
@@ -23,12 +28,14 @@
     "@angular/router": "^20.0.0",
     "@capacitor/android": "7.4.2",
     "@capacitor/app": "7.0.1",
+    "@capacitor/clipboard": "^7.0.1",
     "@capacitor/core": "^7.4.2",
     "@capacitor/haptics": "7.0.1",
     "@capacitor/ios": "7.4.2",
     "@capacitor/keyboard": "7.0.1",
     "@capacitor/status-bar": "7.0.1",
     "@ionic/angular": "^8.0.0",
+    "canei-secure-crypto": "file:canei-secure-crypto",
     "ionicons": "^7.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
