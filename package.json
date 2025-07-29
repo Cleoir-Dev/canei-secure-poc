@@ -7,15 +7,15 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ionic build",
-    "build:prod": "ionic build --prod",
+    "build:prod": "ionic build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
     "ionic:build:after": "npx javascript-obfuscator www --output www --config javascript-obfuscator.config.js",
-    "android-prod": "npm install && npm run build && ionic cap copy android && ionic cap open android",
-    "ios-prod": "npm install && npm run build && ionic cap copy ios && ionic cap open ios",
-    "android": "npm install && npm run build && ionic cap copy android && ionic cap open android",
-    "ios": "npm install && npm run build && ionic cap copy ios && ionic cap open ios"
+    "android-prod": "npm install && npm run build:prod && ionic cap sync android && ionic cap copy android && ionic cap open android",
+    "ios-prod": "npm install && npm run build:prod && ionic cap sync ios && ionic cap copy ios && ionic cap open ios",
+    "android": "npm install && npm run build && ionic cap sync android && ionic cap copy android && ionic cap open android",
+    "ios": "npm install && npm run build && ionic cap sync ios && ionic cap copy ios && ionic cap open ios"
   },
   "private": true,
   "dependencies": {
